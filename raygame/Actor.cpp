@@ -3,6 +3,7 @@
 #include "Actor.h"
 #include "raylib.h"
 #include "Sprite.h"
+#include <fstream>
 
 Actor::Actor(float x, float y, float collisionRadius, char icon = ' ', float maxSpeed = 1)
 {
@@ -18,16 +19,30 @@ Actor::Actor(float x, float y, float collisionRadius, char icon = ' ', float max
     m_collisionRadius = collisionRadius;
     m_childCount = 0;
     m_maxSpeed = maxSpeed;
+    setTag("Actor");
 }
 
 Actor::Actor(float x, float y, float collisionRadius, Sprite* sprite, float maxSpeed = 1) : Actor(x, y, collisionRadius, ' ', maxSpeed)
 {
     m_sprite = sprite;
+    setTag("Actor");
 }
 
 Actor::Actor(float x, float y, float collisionRadius, const char* spriteFilePath, float maxSpeed = 1) : Actor(x, y, collisionRadius, ' ', maxSpeed)
 {
     m_sprite = new Sprite(spriteFilePath);
+    setTag("Actor");
+}
+
+Actor::~Actor()
+{
+    delete m_globalTransform;
+    delete m_localTransform;
+    delete m_rotation;
+    delete m_translation;
+    delete m_scale;
+    delete[] m_children;
+    delete m_sprite;
 }
 
 MathLibrary::Vector2 Actor::getForward()
@@ -247,6 +262,15 @@ void Actor::update(float deltaTime)
     if (m_velocity.getMagnitude() > m_maxSpeed)
         m_velocity = m_velocity.getNormalized() * m_maxSpeed;
 
+    if (getWorldPosition().x > 31.5f)
+        setVelocity(MathLibrary::Vector2(-1, 0));
+    else if (getWorldPosition().x < 0.5f)
+        setVelocity(MathLibrary::Vector2(1, 0));
+    else if (getWorldPosition().y > 23.5f)
+        setVelocity(MathLibrary::Vector2(0, -1));
+    else if (getWorldPosition().y < 0.5f)
+        setVelocity(MathLibrary::Vector2(0, 1));
+
     //Increase position by the current velocity
     setLocalPosition(m_velocity * deltaTime);
 }
@@ -276,6 +300,16 @@ void Actor::debug()
 void Actor::end()
 {
     m_started = false;
+}
+
+int Actor::changeSprite(const char* spritefilepath)
+{
+    if (m_sprite)
+    {
+        delete m_sprite;
+    }
+    m_sprite = new Sprite(spritefilepath);
+    return 0;
 }
 
 void Actor::updateFacing()

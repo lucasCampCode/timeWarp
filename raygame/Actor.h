@@ -2,6 +2,8 @@
 
 #include <Vector2.h>
 #include <Matrix3.h>
+#include <iostream>
+#include <typeinfo>
 
 class Sprite;
 
@@ -29,6 +31,7 @@ public:
     /// <param name="maxSpeed">The largest the magnitude of the actors velocity can be.</param>
     Actor(float x, float y, float collisionRadius, const char* spriteFilePath, float maxSpeed);
 
+    ~Actor();
     /// <summary>
     /// </summary>
     /// <returns>If the actors start function has been called.</returns>
@@ -154,7 +157,7 @@ public:
     /// </summary>
     /// <param name="other">The actor to check collision against.</param>
     /// <returns>Returns true if the distance between the two actors is less than their combined radii.</returns>
-    bool checkCollision(Actor* other);
+     virtual bool checkCollision(Actor* other);
 
     /// <summary>
     /// Called when a collision between this actor and another occurs. 
@@ -167,6 +170,16 @@ public:
     virtual void debug();
     virtual void end();
 
+    const char* getTag() { return m_tag; }
+    void setTag(const char* value) { strncpy_s(m_tag, value, 16); }
+
+    virtual int changeSprite(const char* spritefilepath);
+    const char* sprites[4][3] = {
+        {"images/PizzaGuyWalkAway(1).png","images/PizzaGuyWalkAway(2).png","images/PizzaGuyWalkAway(3).png"},
+        {"images/PizzaGuyWalkRight(1).png","images/PizzaGuyWalkRight(2).png","images/PizzaGuyWalkRight(3).png"},
+        {"images/PizzaGuyWalkLeft(1).png","images/PizzaGuyWalkLeft(2).png","images/PizzaGuyWalkLeft(3).png"},
+        {"images/PizzaGuyWalkForward(1).png","images/PizzaGuyWalkForward(2).png","images/PizzaGuyWalkForward(3).png"},
+    };
 protected:
     /// <summary>
     /// Updates the actors forward vector to be
@@ -199,5 +212,6 @@ private:
     Actor* m_parent;
     int m_childCount;
     Sprite* m_sprite;
+    char m_tag[16];
 };
 
