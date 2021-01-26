@@ -3,8 +3,14 @@
 Scene::Scene()
 {
     m_actorCount = 0;
-    m_actors = new Actor*[0];
+    m_actors = new Actor * [0];
     m_world = new MathLibrary::Matrix3();
+}
+
+Scene::~Scene()
+{
+    delete[] m_actors;
+    delete m_world;
 }
 
 MathLibrary::Matrix3* Scene::getWorld()
@@ -94,6 +100,7 @@ bool Scene::removeActor(Actor* actor)
         }
         else
         {
+            delete m_actors[i];
             actorRemoved = true;
         }
     }

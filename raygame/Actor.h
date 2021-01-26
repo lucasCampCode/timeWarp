@@ -165,6 +165,16 @@ public:
     /// <param name="other">The actor this actor collided with.</param>
     virtual void onCollision(Actor* other);
 
+    /// <summary>
+    /// </summary>
+    /// <returns>returns a value for collision radius</returns>
+    float getCollisionRadius() { return m_collisionRadius; }
+
+    /// <summary>
+    /// </summary>
+    /// <param name="value">sets a value for collision radius</param>
+    void setCollisionRadius(float value) { m_collisionRadius = value; }
+
     virtual void update(float deltaTime);
     virtual void draw();
     virtual void debug();

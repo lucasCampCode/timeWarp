@@ -1,10 +1,13 @@
 #pragma once
-#include "Actor.h"
+#include "Player.h"
+#include "Wall.h"
+#include "Enemy.h"
 
 class Scene
 {
 public:
     Scene();
+    ~Scene();
 
     /// <returns>If this scene is the current active scene in the game.</returns>
     bool getStarted() { return m_started; }
