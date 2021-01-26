@@ -41,17 +41,17 @@ void Game::start()
 	m_playerDeath = new Scene();
 	//first scene and background
 	m_screen1 = new Scene();
-	m_world1 = new Actor(16, 12, 0, "images/firstMap.png", 0);
+	m_world1 = new Actor(16, 12, 0, "Images/firstMap.png", 0);
 	m_world1->scale(MathLibrary::Vector2(32, 24));
 	for (int i = 0; i < 20; i++)
 	{
-		m_enemies[i] = new Enemy(rand() % 30 + 1, rand() % 22 + 1, 0.8f, "images/PizzaGuyWalkRight(2).png", 10, 4, 1);
+		m_enemies[i] = new Enemy(rand() % 30 + 1, rand() % 22 + 1, 0.8f, "Images/PizzaGuyWalkRight(2).png", 10, 4, 1);
 		m_enemies[i]->scale(MathLibrary::Vector2(1.5f, 1.5f));
 	}
 	m_highScore = new Scene();
 	m_load = new Scene();
 	//player initilization
-	m_player1 = new Player(16, 12, 0.8f, "images/PizzaGuyWalkRight(2).png", 10, 10, 2);
+	m_player1 = new Player(16, 12, 0.8f, "Images/PizzaGuyWalkRight(2).png", 10, 10, 2);
 	m_player1->scale(MathLibrary::Vector2(1.5f, 1.5f));
 
 	//m_wall1 = new Wall(6,4,12,8);

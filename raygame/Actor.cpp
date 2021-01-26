@@ -14,7 +14,7 @@ Actor::Actor(float x, float y, float collisionRadius, char icon = ' ', float max
     m_scale = new MathLibrary::Matrix3();
 
     m_icon = icon;
-    setLocalPosition(MathLibrary::Vector2(x,y));
+    setLocalPosition(MathLibrary::Vector2(x, y));
     m_velocity = MathLibrary::Vector2();
     m_collisionRadius = collisionRadius;
     m_childCount = 0;
@@ -95,7 +95,7 @@ void Actor::setVelocity(MathLibrary::Vector2 value)
 
 MathLibrary::Vector2 Actor::getAcceleration()
 {
-	return m_acceleration;
+    return m_acceleration;
 }
 
 void Actor::setAcceleration(MathLibrary::Vector2 value)
@@ -111,7 +111,7 @@ void Actor::start()
 void Actor::addChild(Actor* child)
 {
     //Create a new array with a size one greater than our old array
-    Actor** appendedArray = new Actor*[m_childCount + 1];
+    Actor** appendedArray = new Actor * [m_childCount + 1];
     //Copy the values from the old array to the new array
     for (int i = 0; i < m_childCount; i++)
     {
@@ -160,6 +160,7 @@ bool Actor::removeChild(int index)
     //Set the old array to be the tempArray
     m_children = newArray;
     m_childCount--;
+    delete[] newArray;
     return actorRemoved;
 }
 
@@ -193,6 +194,7 @@ bool Actor::removeChild(Actor* child)
     //Set the old array to the new array
     m_children = newArray;
     m_childCount--;
+    delete[] newArray;
     //Return whether or not the removal was successful
     return actorRemoved;
 }
@@ -221,7 +223,7 @@ void Actor::lookAt(MathLibrary::Vector2 position)
 {
     //Find the direction that the actor should look in
     MathLibrary::Vector2 direction = (position - getWorldPosition()).getNormalized();
-    
+
     //Use the dotproduct to find the angle the actor needs to rotate
     float dotProd = MathLibrary::Vector2::dotProduct(getForward(), direction);
     if (abs(dotProd) > 1)
@@ -253,6 +255,7 @@ void Actor::onCollision(Actor* other)
 
 void Actor::update(float deltaTime)
 {
+
     *m_localTransform = *m_translation * *m_rotation * *m_scale;
 
     updateGlobalTransform();
@@ -272,21 +275,24 @@ void Actor::update(float deltaTime)
         setVelocity(MathLibrary::Vector2(0, 1));
 
     //Increase position by the current velocity
-    setLocalPosition(m_velocity * deltaTime);
+    setLocalPosition(getLocalPosition() + m_velocity * deltaTime);
+
+
 }
 
 void Actor::draw()
 {
-    DrawCircle(getWorldPosition().x * 32, getWorldPosition().y * 32, 50, BLUE);
-    //Draws the actor and a line indicating it facing to the raylib window
-    DrawLine(
-        (int)(getWorldPosition().x * 32),
-        (int)(getWorldPosition().y * 32),
-        (int)((getWorldPosition().x + getForward().x) * 32),
-        (int)((getWorldPosition().y + getForward().y) * 32),
-        WHITE
-    );
-
+    /*
+    DrawCircle(getWorldPosition().x*32, getWorldPosition().y*32, m_collisionRadius*32, BLUE);
+     //Draws the actor and a line indicating it facing to the raylib window
+     DrawLine(
+         (int)(getWorldPosition().x*32),
+         (int)(getWorldPosition().y*32),
+         (int)((getWorldPosition().x + getForward().x)*32),
+         (int)((getWorldPosition().y + getForward().y)*32),
+         WHITE
+     );
+     */
     if (m_sprite)
         m_sprite->draw(*m_globalTransform);
     //Raylib.DrawCircleLines((int)(WorldPosition.X * 32), (int)(WorldPosition.Y * 32), _collisionRadius * 32, _rayColor);
