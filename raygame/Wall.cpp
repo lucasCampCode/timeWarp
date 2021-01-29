@@ -10,6 +10,7 @@ Wall::Wall(float x, float y, float width, float height) : Actor(x, y, 0, " ", 0)
 
 bool Wall::checkCollision(Actor* other)
 {
+	// checks the lowest point of an actor against a rectangle for collision
 	Vector2 point;
 	point.x = other->getWorldPosition().x;
 	point.y = other->getWorldPosition().y + other->getCollisionRadius();
@@ -19,6 +20,7 @@ bool Wall::checkCollision(Actor* other)
 
 void Wall::onCollision(Actor* other)
 {
+	//wall should push the actor away from the wall
 	if (other->getWorldPosition().x < m_collisionBox.width && other->getWorldPosition().x >m_collisionBox.width - 2 && other->getWorldPosition().y > m_collisionBox.y && other->getWorldPosition().y < m_collisionBox.height)
 		other->setVelocity(MathLibrary::Vector2(1, 0));
 	if (other->getWorldPosition().x > m_collisionBox.x && other->getWorldPosition().x < m_collisionBox.x + 2 && other->getWorldPosition().y > m_collisionBox.y && other->getWorldPosition().y < m_collisionBox.height)
@@ -31,5 +33,6 @@ void Wall::onCollision(Actor* other)
 }
 void Wall::draw()
 {
+	//debug to see where the rectangles are draw
 	DrawRectangleLines(m_collisionBox.x * 32, m_collisionBox.y * 32, m_collisionBox.width * 32, m_collisionBox.height * 32, WHITE);
 }

@@ -9,13 +9,14 @@ Enemy::Enemy(float x, float y, float collisionRadius, const char* spriteFilePath
 
 bool Enemy::checkTargetInSight(float maxAngle, float maxDistance)
 {
-	if (m_target == NULL)
+	if (m_target)
 		return false;
+
 	MathLibrary::Vector2 direction = m_target->getWorldPosition() - getWorldPosition();
 
 	float distance = direction.getMagnitude();
 	float angle = (float)_CMATH_::acos(MathLibrary::Vector2::dotProduct(getVelocity(), direction));
-
+	//when target is in sight 
 	if (angle < maxAngle && distance <= maxDistance)
 		return true;
 
@@ -24,25 +25,26 @@ bool Enemy::checkTargetInSight(float maxAngle, float maxDistance)
 
 void Enemy::onCollision(Actor* other)
 {
+	//check to see if enemy has collided with a player
 	if (typeid(*other) == typeid(Player))
-		attack((Entity*)other);
-	other->setAcceleration(getVelocity() * 10);
+		attack((Entity*)other);//attacks Player
+	other->setAcceleration(getVelocity() * 10);//pushes the entity away
 }
 
 void Enemy::update(float deltaTime)
 {
-	if (checkTargetInSight(1, 3))
-	{
-		setVelocity((m_target->getWorldPosition() - getWorldPosition()).getNormalized());
+	if (checkTargetInSight(0.75f, 3))
+	{//if in sight sets  velocity to its target
+		setVelocity((m_target->getWorldPosition() - getWorldPosition()));
 	}
 	else
 	{
 		setVelocity(MathLibrary::Vector2((rand() % 3) - 2, (rand() % 3) - 2));
 	}
 	Entity::update(deltaTime);
+	//destroy enemy if health is below 0
 	if (getHealth() <= 0)
 	{
-		Game::getCurrentScene()->removeActor(this);
-		delete this;
+		Game::destroy(this);
 	}
 }

@@ -264,7 +264,8 @@ void Actor::update(float deltaTime)
 
     if (m_velocity.getMagnitude() > m_maxSpeed)
         m_velocity = m_velocity.getNormalized() * m_maxSpeed;
-
+    
+    //if an actor hits the edge of the screen pushes the sctor away
     if (getWorldPosition().x > 31.5f)
         setVelocity(MathLibrary::Vector2(-1, 0));
     else if (getWorldPosition().x < 0.5f)
@@ -310,10 +311,12 @@ void Actor::end()
 
 int Actor::changeSprite(const char* spritefilepath)
 {
+    //deletes the prevoius sprites memory
     if (m_sprite)
     {
         delete m_sprite;
     }
+    //creates sprite for the next image
     m_sprite = new Sprite(spritefilepath);
     return 0;
 }

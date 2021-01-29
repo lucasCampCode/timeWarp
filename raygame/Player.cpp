@@ -25,8 +25,10 @@ void Player::start()
 void Player::update(float deltaTime)
 {
 	Entity::update(deltaTime);
+	//gets the input from player
 	int xdirection = IsKeyDown(KeyboardKey::KEY_D) - IsKeyDown(KeyboardKey::KEY_A);
 	int ydirection = IsKeyDown(KeyboardKey::KEY_S) - IsKeyDown(KeyboardKey::KEY_W);
+	//changes the players looking direction by changing its sprite 
 	if (m_spriteTimerStarted == true && ((*m_spriteTimerPointer += deltaTime) >= .15)) {
 		if (xdirection == 0 && ydirection == 0)
 			changeSprite(sprites[getCurrentDirection()][1]);
@@ -58,8 +60,6 @@ void Player::update(float deltaTime)
 
 void Player::draw()
 {
-	//health
-
 	Entity::draw();
 }
 
@@ -75,7 +75,7 @@ void Player::m_setTimerGoing(bool value)
 }
 
 int Player::incrementSprite()
-{
+{//increments to the next sprite;
 	m_currentSprite++;
 	if (m_currentSprite > 2) { m_currentSprite = 0; }
 	return m_currentSprite;

@@ -68,4 +68,90 @@
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
+  <ItemGroup>
+    <Image Include="Images\PizzaGuyWalkForward(1).png">
+      <Filter>images</Filter>
+    </Image>
+    <Image Include="Images\PizzaGuyWalkForward(2).png">
+      <Filter>images</Filter>
+    </Image>
+    <Image Include="Images\PizzaGuyWalkForward(3).png">
+      <Filter>images</Filter>
+    </Image>
+    <Image Include="Images\PizzaGuyWalkLeft(1).png">
+      <Filter>images</Filter>
+    </Image>
+    <Image Include="Images\PizzaGuyWalkLeft(2).png">
+      <Filter>images</Filter>
+    </Image>
+    <Image Include="Images\PizzaGuyWalkLeft(3).png">
+      <Filter>images</Filter>
+    </Image>
+    <Image Include="Images\PizzaGuyWalkRight(1).png">
+      <Filter>images</Filter>
+    </Image>
+    <Image Include="Images\PizzaGuyWalkRight(2).png">
+      <Filter>images</Filter>
+    </Image>
+    <Image Include="Images\PizzaGuyWalkRight(3).png">
+      <Filter>images</Filter>
+    </Image>
+    <Image Include="Images\EmptyHeart.png">
+      <Filter>images</Filter>
+    </Image>
+    <Image Include="Images\firstMap.png">
+      <Filter>images</Filter>
+    </Image>
+    <Image Include="Images\FullHeart.png">
+      <Filter>images</Filter>
+    </Image>
+    <Image Include="Images\HalfHeart.png">
+      <Filter>images</Filter>
+    </Image>
+    <Image Include="Images\pizzaGuyPizzaWalkAway(1).png">
+      <Filter>images</Filter>
+    </Image>
+    <Image Include="Images\pizzaGuyPizzaWalkAway(2).png">
+      <Filter>images</Filter>
+    </Image>
+    <Image Include="Images\pizzaGuyPizzaWalkAway(3).png">
+      <Filter>images</Filter>
+    </Image>
+    <Image Include="Images\pizzaGuyPizzaWalkForward(1).png">
+      <Filter>images</Filter>
+    </Image>
+    <Image Include="Images\pizzaGuyPizzaWalkForward(2).png">
+      <Filter>images</Filter>
+    </Image>
+    <Image Include="Images\pizzaGuyPizzaWalkForward(3).png">
+      <Filter>images</Filter>
+    </Image>
+    <Image Include="Images\pizzaGuyPizzaWalkLeft(1).png">
+      <Filter>images</Filter>
+    </Image>
+    <Image Include="Images\pizzaGuyPizzaWalkLeft(2).png">
+      <Filter>images</Filter>
+    </Image>
+    <Image Include="Images\pizzaGuyPizzaWalkLeft(3).png">
+      <Filter>images</Filter>
+    </Image>
+    <Image Include="Images\pizzaGuyPizzaWalkRight(1).png">
+      <Filter>images</Filter>
+    </Image>
+    <Image Include="Images\pizzaGuyPizzaWalkRight(2).png">
+      <Filter>images</Filter>
+    </Image>
+    <Image Include="Images\pizzaGuyPizzaWalkRight(3).png">
+      <Filter>images</Filter>
+    </Image>
+    <Image Include="Images\PizzaGuyWalkAway(1).png">
+      <Filter>images</Filter>
+    </Image>
+    <Image Include="Images\PizzaGuyWalkAway(2).png">
+      <Filter>images</Filter>
+    </Image>
+    <Image Include="Images\PizzaGuyWalkAway(3).png">
+      <Filter>images</Filter>
+    </Image>
+  </ItemGroup>
 </Project>

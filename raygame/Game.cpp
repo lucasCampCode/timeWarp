@@ -18,9 +18,10 @@ Game::Game()
 }
 
 bool Game::withinBounds(int Lp, int Tp, int Rp, int Bp)
-{
+{//gets mouse potision of the mouse 
 	float mouseposx = GetMouseX();
 	float mouseposy = GetMouseY();
+	//checks to see if the the mouse is inside the area of intrest and is clicked
 	if (mouseposx >= Lp && mouseposx <= Rp && mouseposy >= Tp && mouseposy <= Bp && IsMouseButtonPressed(MOUSE_LEFT_BUTTON))
 		return true;
 	return false;
@@ -43,11 +44,6 @@ void Game::start()
 	m_screen1 = new Scene();
 	m_world1 = new Actor(16, 12, 0, "Images/firstMap.png", 0);
 	m_world1->scale(MathLibrary::Vector2(32, 24));
-	for (int i = 0; i < 20; i++)
-	{
-		m_enemies[i] = new Enemy(rand() % 30 + 1, rand() % 22 + 1, 0.8f, "Images/PizzaGuyWalkRight(2).png", 10, 4, 1);
-		m_enemies[i]->scale(MathLibrary::Vector2(1.5f, 1.5f));
-	}
 	m_highScore = new Scene();
 	m_load = new Scene();
 	//player initilization
@@ -58,6 +54,7 @@ void Game::start()
 	//m_wall2 = new Wall(26,4,12,8);
 	//m_wall3 = new Wall(6,19,12,7);
 	//m_wall4 = new Wall(26,19,12,7);
+
 	//addes scenes and actors to those scenes
 	setCurrentScene(addScene(m_start));//index 0
 	addScene(m_highScore);//index 1
@@ -72,7 +69,9 @@ void Game::start()
 	//m_screen1->addActor(m_wall3);
 	//m_screen1->addActor(m_wall4);
 }
-
+/// <summary>
+/// initilizes rectangles for each scene needed.
+/// </summary>
 void Game::initRecs()
 {
 	m_startB.x = 312;
@@ -111,7 +110,7 @@ void Game::updateSceneButtons()
 
 	switch (m_currentSceneIndex)
 	{
-	case 0:
+	case 0://start screen
 		if (CheckCollisionPointRec(GetMousePosition(), m_startB) && IsMouseButtonPressed(MOUSE_LEFT_BUTTON))
 			setCurrentScene(3);
 		if (CheckCollisionPointRec(GetMousePosition(), m_highScoreB) && IsMouseButtonPressed(MOUSE_LEFT_BUTTON))
@@ -121,17 +120,17 @@ void Game::updateSceneButtons()
 		if (CheckCollisionPointRec(GetMousePosition(), m_exitB) && IsMouseButtonPressed(MOUSE_LEFT_BUTTON))
 			setGameOver(true);
 		break;
-	case 1:
+	case 1://highscore screen
 		if (CheckCollisionPointRec(GetMousePosition(), m_returnB) && IsMouseButtonPressed(MOUSE_LEFT_BUTTON))
 			setCurrentScene(0);
 		break;
-	case 2:
+	case 2://load screen
 		if (CheckCollisionPointRec(GetMousePosition(), m_returnB) && IsMouseButtonPressed(MOUSE_LEFT_BUTTON))
 			setCurrentScene(0);
 		break;
-	case 3:
+	case 3://world 1 screen
 		break;
-	case 4:
+	case 4://death screen
 		break;
 	default:
 		break;
@@ -140,10 +139,16 @@ void Game::updateSceneButtons()
 
 void Game::startWave(float deltaTime)
 {
+	//when timer reach 5 it resets to 0 and creates a enemy to the current scene
 	if ((m_timer += deltaTime) > 5)
 	{
-		if (m_enemyCount < 20)
-			m_screen1->addActor(m_enemies[m_enemyCount]);
+		if (m_enemyCount > (sizeof(m_enemies) / sizeof(Enemy)) - 1) {
+			return;
+		}
+		m_enemies[m_enemyCount] = new Enemy((rand() % 30) + 1, (rand() % 22) + 1, 0.8f, "Images/PizzaGuyWalkForward(1).png", 5, 5, 1);
+		m_enemies[m_enemyCount]->scale(MathLibrary::Vector2(1.5f, 1.5f));
+		m_enemies[m_enemyCount]->setTarget(m_player1);
+		getCurrentScene()->addActor(m_enemies[m_enemyCount]);
 		m_enemyCount++;
 		m_timer = 0;
 	}
@@ -153,28 +158,39 @@ void Game::drawScreenButtons()
 {
 	switch (m_currentSceneIndex)
 	{
-	case 0:
+	case 0://start screen
+		//draws start box
 		DrawRectangleRec(m_startB, GREEN);
 		DrawText("start", m_startB.x + 50, m_startB.y + 0, 80, WHITE);
+		//draws highscore box
 		DrawRectangleRec(m_highScoreB, ORANGE);
 		DrawText("HighScore", m_highScoreB.x + 0, m_highScoreB.y + 10, 63, WHITE);
+		//draws load box
 		DrawRectangleRec(m_loadB, DARKBLUE);
 		DrawText("Load", m_loadB.x + 55, m_loadB.y + 0, 80, WHITE);
+		//draws exit box
 		DrawRectangleRec(m_exitB, RED);
 		DrawText("exit", m_exitB.x + 60, m_exitB.y + 0, 80, WHITE);
 		break;
 	case 1:
+		//highscore screen
+		//draws return box
 		DrawRectangleLinesEx(m_returnB, 4, WHITE);
 		DrawText("return", m_returnB.x + 20, m_returnB.y + 0, 80, WHITE);
+		//draws table
 		DrawRectangleLinesEx(m_tableB, 4, WHITE);
 		break;
 	case 2:
+		//load screen
+		//draws return box
 		DrawRectangleLinesEx(m_returnB, 4, WHITE);
 		DrawText("return", m_returnB.x + 20, m_returnB.y + 0, 80, WHITE);
 		break;
 	case 3:
+		//world 1 battle screen
 		break;
 	case 4:
+		//death screen
 		break;
 	default:
 		break;

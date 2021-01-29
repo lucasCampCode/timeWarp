@@ -166,6 +166,36 @@
     <ClInclude Include="Sprite.h" />
     <ClInclude Include="Wall.h" />
   </ItemGroup>
+  <ItemGroup>
+    <Image Include="Images\EmptyHeart.png" />
+    <Image Include="Images\firstMap.png" />
+    <Image Include="Images\FullHeart.png" />
+    <Image Include="Images\HalfHeart.png" />
+    <Image Include="Images\pizzaGuyPizzaWalkAway(1).png" />
+    <Image Include="Images\pizzaGuyPizzaWalkAway(2).png" />
+    <Image Include="Images\pizzaGuyPizzaWalkAway(3).png" />
+    <Image Include="Images\pizzaGuyPizzaWalkForward(1).png" />
+    <Image Include="Images\pizzaGuyPizzaWalkForward(2).png" />
+    <Image Include="Images\pizzaGuyPizzaWalkForward(3).png" />
+    <Image Include="Images\pizzaGuyPizzaWalkLeft(1).png" />
+    <Image Include="Images\pizzaGuyPizzaWalkLeft(2).png" />
+    <Image Include="Images\pizzaGuyPizzaWalkLeft(3).png" />
+    <Image Include="Images\pizzaGuyPizzaWalkRight(1).png" />
+    <Image Include="Images\pizzaGuyPizzaWalkRight(2).png" />
+    <Image Include="Images\pizzaGuyPizzaWalkRight(3).png" />
+    <Image Include="Images\PizzaGuyWalkAway(1).png" />
+    <Image Include="Images\PizzaGuyWalkAway(2).png" />
+    <Image Include="Images\PizzaGuyWalkAway(3).png" />
+    <Image Include="Images\PizzaGuyWalkForward(1).png" />
+    <Image Include="Images\PizzaGuyWalkForward(2).png" />
+    <Image Include="Images\PizzaGuyWalkForward(3).png" />
+    <Image Include="Images\PizzaGuyWalkLeft(1).png" />
+    <Image Include="Images\PizzaGuyWalkLeft(2).png" />
+    <Image Include="Images\PizzaGuyWalkLeft(3).png" />
+    <Image Include="Images\PizzaGuyWalkRight(1).png" />
+    <Image Include="Images\PizzaGuyWalkRight(2).png" />
+    <Image Include="Images\PizzaGuyWalkRight(3).png" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
