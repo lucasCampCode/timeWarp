@@ -326,7 +326,6 @@ bool Game::removeScene(Scene* scene)
 		m_sceneCount--;
 	}
 
-
 	return sceneRemoved;
 }
 
